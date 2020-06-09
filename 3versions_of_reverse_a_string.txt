@@ -1,0 +1,74 @@
+(i) Reverse String
+Write a function that reverses a string. The input string is given as an array of characters char[].
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+You may assume all the characters consist of printable ascii characters.
+
+ 
+
+Example 1:
+
+Input: ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+Example 2:
+
+Input: ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
+
+SOLUTION:
+----O(N), O(1)-----
+
+void reverseString(vector<char>& s) {
+        reverse(s.begin(),s.end());   
+    }
+
+(ii) Reverse String II
+Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
+Example:
+Input: s = "abcdefg", k = 2
+Output: "bacdfeg"
+Restrictions:
+The string consists of lower English letters only.
+Length of the given string and k will in the range [1, 10000]
+
+SOLUTION:
+-----O(N), O(1) ........
+
+ string reverseStr(string s, int k) {
+        if(s.length()<=0 || k<=1)
+            return s;
+        int l = 0;
+        int r = min(k,(int)s.length());
+        while(l<s.length()){
+            reverse(s.begin()+l,s.begin()+r);
+            l+=2*k;
+            r=min(l+k,(int)s.length());
+        }
+        return s;
+    }
+
+(iii) Reverse Words in a String III
+Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+Example 1:
+Input: "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+Note: In the string, each word is separated by single space and there will not be any extra space in the string.
+
+SOLUTION:
+-------O(N), O(1) --------
+
+     string reverseWords(string s) {
+        int l =0, r = 0;
+        while(l < s.length()){
+            while(r < s.length() && s[r] != ' ')
+                r++;
+            reverse(s.begin()+l,s.begin()+r);
+            l=r+1;
+            r=l;
+        }
+        return s;
+    }
+
+
